@@ -9,15 +9,16 @@
 <meta property="og:description" content="Curated stores for the home.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://solandree.com/">
-<meta property="og:image" content="https://cdn.shopify.com/s/files/1/0948/2908/4919/files/photo-1618221195710-dd6b41faaea6.jpg?width=1200">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' fill='%23fff'/%3E%3Ctext x='32' y='48' font-family='Didot,Georgia,serif' font-weight='700' font-size='46' text-anchor='middle' fill='%23000'%3ES%3C/text%3E%3C/svg%3E">
+<meta property="og:image" content="https://cdn.shopify.com/s/files/1/0948/2908/4919/files/photo-1586023492125-27b2c045efd7.jpg?width=1200">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' fill='%23000'/%3E%3Ctext x='32' y='48' font-family='Didot,Georgia,serif' font-weight='700' font-size='46' text-anchor='middle' fill='%23fff'%3ES%3C/text%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:opsz,wght@6..96,500;6..96,800&display=swap" rel="stylesheet">
 <style>
   /* solandree.com 회사 페이지: 한 화면(스크롤 없음) · 사진 자동 전환 · COMPANY / STORES / CONTACT 는 옆에서 열리는 창.
      샵 목록은 아래 STORES, 사진은 PHOTOS 에서 고쳐요. 사진은 MICASA 쇼피파이 파일(Unsplash). */
-  :root { --bg: #FFFFFF; --text: #000000; --muted: #6E6E6E; --line: #E6E6E6; --serif: "Bodoni Moda", Didot, "Bodoni 72", Georgia, serif; --sans: "Helvetica Neue", Helvetica, Arial, sans-serif; }
+  /* MICASA(흰 바탕·따뜻한 컬러 사진)와 반대로: 검은 바탕 · 흰 글씨 · 흑백 사진 */
+  :root { --bg: #0A0A0A; --text: #F2F2F2; --muted: #9A9A9A; --line: #2A2A2A; --serif: "Bodoni Moda", Didot, "Bodoni 72", Georgia, serif; --sans: "Helvetica Neue", Helvetica, Arial, sans-serif; }
   * { box-sizing: border-box; }
   html, body { height: 100%; margin: 0; overflow: hidden; background: var(--bg); color: var(--text); font: 14px/1.6 var(--sans); }
   a { color: inherit; text-decoration: none; }
@@ -26,8 +27,8 @@
   nav.top a { font-size: 12px; text-transform: uppercase; letter-spacing: .14em; margin-left: 30px; padding: 6px 0; border-bottom: 1px solid transparent; }
   nav.top a:hover, nav.top a.on { border-bottom-color: currentColor; }
 
-  .stage { position: fixed; top: 76px; left: 0; right: 0; bottom: 0; overflow: hidden; background: #E9E4DC; }
-  .stage img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0; transition: opacity 1.4s ease; }
+  .stage { position: fixed; top: 76px; left: 0; right: 0; bottom: 0; overflow: hidden; background: #111; }
+  .stage img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0; transition: opacity 1.4s ease; filter: grayscale(1) contrast(1.08) brightness(.82); }
   .stage img.on { opacity: 1; }
   .stage::after { content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 55%; background: linear-gradient(to top, rgba(0,0,0,.45), rgba(0,0,0,0)); pointer-events: none; }
   .tagline { position: absolute; left: 0; right: 0; bottom: 25%; z-index: 2; text-align: center; color: #fff; padding: 0 24px; text-shadow: 0 1px 14px rgba(0,0,0,.35); }
@@ -38,7 +39,7 @@
   .legal { position: absolute; left: 28px; right: 28px; bottom: 18px; z-index: 2; display: flex; justify-content: space-between; gap: 12px; color: rgba(255,255,255,.85); font-size: 11px; letter-spacing: .1em; text-transform: uppercase; }
 
   /* 옆에서 열리는 창 */
-  .veil { position: fixed; inset: 76px 0 0 0; background: rgba(0,0,0,.18); opacity: 0; pointer-events: none; transition: opacity .35s; z-index: 10; }
+  .veil { position: fixed; inset: 76px 0 0 0; background: rgba(0,0,0,.45); opacity: 0; pointer-events: none; transition: opacity .35s; z-index: 10; }
   .panel { position: fixed; top: 76px; bottom: 0; left: 0; width: min(560px, 100%); background: var(--bg); transform: translateX(-102%); transition: transform .45s cubic-bezier(.2,.7,.2,1); z-index: 11; display: flex; flex-direction: column; }
   body.open .veil { opacity: 1; pointer-events: auto; }
   .panel.on { transform: none; }
@@ -46,7 +47,7 @@
   .close { position: absolute; top: 18px; right: 22px; border: 0; background: none; font-size: 26px; line-height: 1; cursor: pointer; color: var(--text); }
   .label { font-size: 11px; text-transform: uppercase; letter-spacing: .18em; color: var(--muted); margin: 0 0 10px; }
   .panel h2 { font-family: var(--serif); font-weight: 500; font-size: 36px; letter-spacing: .02em; margin: 0 0 18px; line-height: 1.15; }
-  .panel p { margin: 0 0 14px; color: #222; }
+  .panel p { margin: 0 0 14px; color: #D6D6D6; }
   .facts { display: grid; grid-template-columns: 1fr 1fr; gap: 1px; background: var(--line); border: 1px solid var(--line); margin: 22px 0 26px; }
   .facts div { background: var(--bg); padding: 14px 16px; }
   .facts b { display: block; font-size: 11px; text-transform: uppercase; letter-spacing: .16em; color: var(--muted); font-weight: 400; margin-bottom: 2px; }
@@ -56,7 +57,7 @@
   .pillars li span { color: var(--muted); }
   .store { display: grid; grid-template-columns: 160px 1fr; gap: 20px; padding: 20px 0; border-bottom: 1px solid var(--line); align-items: center; }
   .store:first-of-type { border-top: 1px solid var(--line); }
-  .store .ph { width: 160px; aspect-ratio: 4 / 5; background: #F4F3F1 center / cover no-repeat; }
+  .store .ph { width: 160px; aspect-ratio: 4 / 5; background: #1A1A1A center / cover no-repeat; }
   .store h3 { font-family: var(--serif); font-weight: 800; font-size: 28px; margin: 0 0 2px; transform: scaleX(.9); transform-origin: left; }
   .store .tag { font-size: 11px; text-transform: uppercase; letter-spacing: .16em; color: var(--muted); }
   .store p { margin: 8px 0 10px; color: var(--muted); }
@@ -155,7 +156,7 @@
     { name: 'Furniture', tag: 'Coming soon', img: '', text: 'Compact, easy-to-assemble furniture for small spaces.', url: '' },
   ];
   // 첫 화면 사진 (5초마다 바뀜)
-  const PHOTOS = ['photo-1618221195710-dd6b41faaea6.jpg', 'photo-1522771739844-6a9f6d5f14af.jpg', 'photo-1616486338812-3dadae4b4ace.jpg', 'photo-1600210492486-724fe5c67fb0.jpg'];
+  const PHOTOS = ['photo-1586023492125-27b2c045efd7.jpg', 'photo-1484101403633-562f891dc89a.jpg', 'photo-1556911220-bff31c812dba.jpg', 'photo-1505693416388-ac5ce068fe85.jpg'];
 
   const esc = (s) => String(s).replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
   document.getElementById('storeList').innerHTML = STORES.map((s) => {
