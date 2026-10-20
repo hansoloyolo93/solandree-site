@@ -95,7 +95,7 @@
       <h3>${esc(b.name)}</h3>
       <p>${esc(b.text)}</p>
       ${b.url ? `<span class="btn">Shop ${esc(b.tag)} →</span>` : '<span class="muted-pill">Coming soon</span>'}
-    </article>`).map((html, i) => (BRANDS[i].url ? `<a class="card-link" href="${esc(BRANDS[i].url)}" rel="noopener">${html}</a>` : html)).join('');
+    </article>`).map((html, i) => (BRANDS[i].url ? `<a class="card-link" href="${esc(BRANDS[i].url)}" target="_blank" rel="noopener">${html}</a>` : html)).join('');
   document.getElementById('year').textContent = new Date().getFullYear();
 </script>
 </body>
