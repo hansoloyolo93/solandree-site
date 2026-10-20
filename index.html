@@ -10,44 +10,49 @@
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://solandree.com/">
 <meta property="og:image" content="https://cdn.shopify.com/s/files/1/0948/2908/4919/files/photo-1586023492125-27b2c045efd7.jpg?width=1200">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' fill='%23000'/%3E%3Ctext x='32' y='48' font-family='Didot,Georgia,serif' font-weight='700' font-size='46' text-anchor='middle' fill='%23fff'%3ES%3C/text%3E%3C/svg%3E">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' fill='%23fff'/%3E%3Ctext x='32' y='48' font-family='Didot,Georgia,serif' font-weight='700' font-size='46' text-anchor='middle' fill='%23000'%3ES%3C/text%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:opsz,wght@6..96,500;6..96,800&display=swap" rel="stylesheet">
 <style>
-  /* solandree.com 회사 페이지: 한 화면(스크롤 없음) · 사진 자동 전환 · COMPANY / STORES / CONTACT 는 옆에서 열리는 창.
-     샵 목록은 아래 STORES, 사진은 PHOTOS 에서 고쳐요. 사진은 MICASA 쇼피파이 파일(Unsplash). */
-  /* MICASA(흰 바탕·따뜻한 컬러 사진)와 반대로: 검은 바탕 · 흰 글씨 · 흑백 사진 */
-  :root { --bg: #0A0A0A; --text: #F2F2F2; --muted: #9A9A9A; --line: #2A2A2A; --serif: "Bodoni Moda", Didot, "Bodoni 72", Georgia, serif; --sans: "Helvetica Neue", Helvetica, Arial, sans-serif; }
+  /* solandree.com 회사 페이지: 흰 바탕 · 가운데 SOLANDREE · 샵 카드(사진)를 나란히 = "여러 샵이 모인 회사" · 한 화면(스크롤 없음).
+     COMPANY / STORES / CONTACT 는 옆에서 열리는 창. 샵 목록은 아래 STORES 에서 고쳐요. 사진은 MICASA 쇼피파이 파일(Unsplash). */
+  :root { --bg: #FFFFFF; --text: #000000; --muted: #707070; --line: #E6E6E6; --serif: "Bodoni Moda", Didot, "Bodoni 72", Georgia, serif; --sans: "Helvetica Neue", Helvetica, Arial, sans-serif; }
   * { box-sizing: border-box; }
   html, body { height: 100%; margin: 0; overflow: hidden; background: var(--bg); color: var(--text); font: 14px/1.6 var(--sans); }
   a { color: inherit; text-decoration: none; }
-  header { position: fixed; top: 0; left: 0; right: 0; height: 76px; display: flex; align-items: center; justify-content: space-between; padding: 0 28px; background: var(--bg); z-index: 20; }
-  .word { font-family: var(--serif); font-weight: 800; font-size: 34px; letter-spacing: -0.01em; transform: scaleX(.88); transform-origin: left; line-height: 1; }
-  nav.top a { font-size: 12px; text-transform: uppercase; letter-spacing: .14em; margin-left: 30px; padding: 6px 0; border-bottom: 1px solid transparent; }
+  body { display: flex; flex-direction: column; }
+  header { flex: none; text-align: center; padding: 30px 24px 0; position: relative; z-index: 20; background: var(--bg); }
+  .word { display: inline-block; font-family: var(--serif); font-weight: 800; font-size: clamp(38px, 5vw, 64px); letter-spacing: .02em; line-height: 1; }
+  .sub { margin: 10px 0 0; font-size: 11px; text-transform: uppercase; letter-spacing: .32em; color: var(--muted); }
+  nav.top { margin-top: 18px; display: flex; justify-content: center; gap: 40px; }
+  nav.top a { font-size: 12px; text-transform: uppercase; letter-spacing: .16em; padding: 4px 0; border-bottom: 1px solid transparent; }
   nav.top a:hover, nav.top a.on { border-bottom-color: currentColor; }
 
-  .stage { position: fixed; top: 76px; left: 0; right: 0; bottom: 0; overflow: hidden; background: #111; }
-  .stage img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0; transition: opacity 1.4s ease; filter: grayscale(1) contrast(1.08) brightness(.82); }
-  .stage img.on { opacity: 1; }
-  .stage::after { content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 55%; background: linear-gradient(to top, rgba(0,0,0,.45), rgba(0,0,0,0)); pointer-events: none; }
-  .tagline { position: absolute; left: 0; right: 0; bottom: 25%; z-index: 2; text-align: center; color: #fff; padding: 0 24px; text-shadow: 0 1px 14px rgba(0,0,0,.35); }
-  .tagline h1 { font-family: var(--serif); font-weight: 500; font-size: clamp(30px, 4.6vw, 60px); letter-spacing: .03em; margin: 0 0 14px; line-height: 1.1; }
-  .tagline .links { display: flex; justify-content: center; flex-wrap: wrap; gap: 10px 34px; }
-  .tagline .links a { font-size: 13px; text-transform: uppercase; letter-spacing: .14em; opacity: .85; }
-  .tagline .links a:hover { opacity: 1; font-weight: 700; }
-  .legal { position: absolute; left: 28px; right: 28px; bottom: 18px; z-index: 2; display: flex; justify-content: space-between; gap: 12px; color: rgba(255,255,255,.85); font-size: 11px; letter-spacing: .1em; text-transform: uppercase; }
+  /* 샵 카드 벽 */
+  main.wall { flex: 1; min-height: 0; display: flex; align-items: center; justify-content: center; gap: 22px; padding: 26px 40px 10px; }
+  .tile { position: relative; flex: none; height: min(54vh, 560px, calc((100vw - 146px) / 4 * 4 / 3 + 40px)); aspect-ratio: 3 / 4.4; display: flex; flex-direction: column; }
+  .tile .img { flex: 1; background: #F2F1EE center / cover no-repeat; overflow: hidden; }
+  .tile .img span { display: block; width: 100%; height: 100%; background: inherit; transition: transform .8s ease; }
+  a.tile:hover .img span { transform: scale(1.04); }
+  .tile.soon .img { filter: grayscale(1); opacity: .55; }
+  .tile.more .img { background: none; border: 1px solid var(--line); display: flex; align-items: center; justify-content: center; font-family: var(--serif); font-size: 46px; color: #BDBDBD; }
+  .tile .cap { flex: none; display: flex; justify-content: space-between; align-items: baseline; gap: 10px; padding-top: 12px; }
+  .tile .name { font-family: var(--serif); font-weight: 800; font-size: 22px; line-height: 1; }
+  .tile .kind { font-size: 10.5px; text-transform: uppercase; letter-spacing: .16em; color: var(--muted); white-space: nowrap; }
+  .tile .kind.live { color: var(--text); }
+  footer { flex: none; display: flex; justify-content: space-between; gap: 12px; padding: 12px 28px 18px; font-size: 10.5px; text-transform: uppercase; letter-spacing: .14em; color: var(--muted); }
 
   /* 옆에서 열리는 창 */
-  .veil { position: fixed; inset: 76px 0 0 0; background: rgba(0,0,0,.45); opacity: 0; pointer-events: none; transition: opacity .35s; z-index: 10; }
-  .panel { position: fixed; top: 76px; bottom: 0; left: 0; width: min(560px, 100%); background: var(--bg); transform: translateX(-102%); transition: transform .45s cubic-bezier(.2,.7,.2,1); z-index: 11; display: flex; flex-direction: column; }
+  .veil { position: fixed; inset: 0; background: rgba(255,255,255,.6); opacity: 0; pointer-events: none; transition: opacity .35s; z-index: 30; }
+  .panel { position: fixed; top: 0; bottom: 0; left: 0; width: min(560px, 100%); background: var(--bg); border-right: 1px solid var(--line); transform: translateX(-102%); transition: transform .45s cubic-bezier(.2,.7,.2,1); z-index: 31; display: flex; flex-direction: column; }
   body.open .veil { opacity: 1; pointer-events: auto; }
   .panel.on { transform: none; }
-  .panel .inner { flex: 1; overflow-y: auto; padding: 34px 40px 40px; }
+  .panel .inner { flex: 1; overflow-y: auto; padding: 44px 40px 40px; }
   .close { position: absolute; top: 18px; right: 22px; border: 0; background: none; font-size: 26px; line-height: 1; cursor: pointer; color: var(--text); }
   .label { font-size: 11px; text-transform: uppercase; letter-spacing: .18em; color: var(--muted); margin: 0 0 10px; }
   .panel h2 { font-family: var(--serif); font-weight: 500; font-size: 36px; letter-spacing: .02em; margin: 0 0 18px; line-height: 1.15; }
-  .panel p { margin: 0 0 14px; color: #D6D6D6; }
+  .panel p { margin: 0 0 14px; color: #222; }
   .facts { display: grid; grid-template-columns: 1fr 1fr; gap: 1px; background: var(--line); border: 1px solid var(--line); margin: 22px 0 26px; }
   .facts div { background: var(--bg); padding: 14px 16px; }
   .facts b { display: block; font-size: 11px; text-transform: uppercase; letter-spacing: .16em; color: var(--muted); font-weight: 400; margin-bottom: 2px; }
@@ -55,10 +60,11 @@
   .pillars li { padding: 14px 0; border-bottom: 1px solid var(--line); }
   .pillars li b { display: block; font-size: 12px; text-transform: uppercase; letter-spacing: .14em; margin-bottom: 2px; }
   .pillars li span { color: var(--muted); }
-  .store { display: grid; grid-template-columns: 160px 1fr; gap: 20px; padding: 20px 0; border-bottom: 1px solid var(--line); align-items: center; }
+  .store { display: grid; grid-template-columns: 140px 1fr; gap: 20px; padding: 20px 0; border-bottom: 1px solid var(--line); align-items: center; }
   .store:first-of-type { border-top: 1px solid var(--line); }
-  .store .ph { width: 160px; aspect-ratio: 4 / 5; background: #1A1A1A center / cover no-repeat; }
-  .store h3 { font-family: var(--serif); font-weight: 800; font-size: 28px; margin: 0 0 2px; transform: scaleX(.9); transform-origin: left; }
+  .store .ph { width: 140px; aspect-ratio: 3 / 4; background: #F2F1EE center / cover no-repeat; }
+  .store.soon .ph { filter: grayscale(1); opacity: .55; }
+  .store h3 { font-family: var(--serif); font-weight: 800; font-size: 28px; margin: 0 0 2px; }
   .store .tag { font-size: 11px; text-transform: uppercase; letter-spacing: .16em; color: var(--muted); }
   .store p { margin: 8px 0 10px; color: var(--muted); }
   .go { font-size: 12px; text-transform: uppercase; letter-spacing: .14em; border-bottom: 1px solid currentColor; padding-bottom: 2px; }
@@ -69,23 +75,26 @@
   .contact-block a.mail { border-bottom: 1px solid currentColor; }
   .contact-block span { color: var(--muted); }
 
-  @media (max-width: 640px) {
-    header { height: 64px; padding: 0 18px; }
-    .word { font-size: 23px; }
-    nav.top { white-space: nowrap; }
-    nav.top a { margin-left: 12px; font-size: 10.5px; letter-spacing: .08em; }
-    .stage, .veil, .panel { top: 64px; }
-    .panel .inner { padding: 28px 22px 32px; }
-    .store { grid-template-columns: 110px 1fr; }
-    .store .ph { width: 110px; }
-    .legal { left: 18px; right: 18px; flex-direction: column; gap: 2px; text-align: center; }
+  @media (max-width: 900px) {
+    main.wall { justify-content: flex-start; overflow-x: auto; scroll-snap-type: x mandatory; padding: 20px 20px 8px; gap: 14px; }
+    .tile { height: min(52vh, 460px); scroll-snap-align: center; flex: none; }
   }
-  @media (prefers-reduced-motion: reduce) { .stage img, .panel, .veil { transition: none; } }
+  @media (max-width: 640px) {
+    header { padding-top: 22px; }
+    nav.top { gap: 22px; margin-top: 14px; }
+    nav.top a { font-size: 11px; letter-spacing: .12em; }
+    .panel .inner { padding: 40px 22px 32px; }
+    .store { grid-template-columns: 100px 1fr; }
+    .store .ph { width: 100px; }
+    footer { flex-direction: column; gap: 2px; text-align: center; }
+  }
+  @media (prefers-reduced-motion: reduce) { .panel, .veil, .tile .img span { transition: none; } }
 </style>
 </head>
 <body>
 <header>
   <a class="word" href="#" data-close>SOLANDREE</a>
+  <p class="sub">A family of curated stores</p>
   <nav class="top">
     <a href="#company" data-open="company">Company</a>
     <a href="#stores" data-open="stores">Stores</a>
@@ -93,17 +102,9 @@
   </nav>
 </header>
 
-<main class="stage" id="stage">
-  <div class="tagline">
-    <h1>Curated stores for the home</h1>
-    <div class="links">
-      <a href="#company" data-open="company">Company</a>
-      <a href="#stores" data-open="stores">Our stores</a>
-      <a href="#contact" data-open="contact">Contact</a>
-    </div>
-  </div>
-  <div class="legal"><span>© <span id="year">2026</span> Solandree LLC</span><span>Sheridan, Wyoming · United States</span></div>
-</main>
+<main class="wall" id="wall" aria-label="Our stores"></main>
+
+<footer><span>© <span id="year">2026</span> Solandree LLC</span><span>Sheridan, Wyoming · United States</span></footer>
 
 <div class="veil" data-close></div>
 
@@ -152,33 +153,27 @@
   // 샵 목록: 새 샵을 열면 한 줄 추가 (url 있으면 Visit store, 새 탭으로 열림)
   const CDN = 'https://cdn.shopify.com/s/files/1/0948/2908/4919/files/';
   const STORES = [
-    { name: 'MICASA', tag: 'Home', img: CDN + 'photo-1618221195710-dd6b41faaea6.jpg?width=480', text: 'Fabrics, tableware, bedding and kitchen essentials for everyday living.', url: 'https://solan-dree.myshopify.com' },
-    { name: 'Furniture', tag: 'Coming soon', img: '', text: 'Compact, easy-to-assemble furniture for small spaces.', url: '' },
+    { name: 'MICASA', tag: 'Home & living', img: CDN + 'photo-1618221195710-dd6b41faaea6.jpg', text: 'Fabrics, tableware, bedding and kitchen essentials for everyday living.', url: 'https://solan-dree.myshopify.com' },
+    { name: 'Furniture', tag: 'Coming soon', img: CDN + 'photo-1586023492125-27b2c045efd7.jpg', text: 'Compact, easy-to-assemble furniture for small spaces.', url: '' },
+    { name: 'Next store', tag: 'Coming soon', img: CDN + 'photo-1505693416388-ac5ce068fe85.jpg', text: 'More focused stores for the home are on the way.', url: '' },
   ];
-  // 첫 화면 사진 (5초마다 바뀜)
-  const PHOTOS = ['photo-1586023492125-27b2c045efd7.jpg', 'photo-1484101403633-562f891dc89a.jpg', 'photo-1556911220-bff31c812dba.jpg', 'photo-1505693416388-ac5ce068fe85.jpg'];
 
   const esc = (s) => String(s).replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+  const bg = (u, w) => (u ? `background-image:url('${esc(u)}?width=${w}')` : '');
+  // 첫 화면: 샵 카드를 나란히 (+ 맨 끝에 "더 생길 샵" 빈 카드)
+  document.getElementById('wall').innerHTML = STORES.map((s) => {
+    const inner = `<div class="img"><span style="${bg(s.img, 900)}"></span></div>
+      <div class="cap"><span class="name">${esc(s.name)}</span><span class="kind${s.url ? ' live' : ''}">${s.url ? 'Visit ↗' : esc(s.tag)}</span></div>`;
+    return s.url ? `<a class="tile" href="${esc(s.url)}" target="_blank" rel="noopener" title="${esc(s.text)}">${inner}</a>` : `<div class="tile soon" title="${esc(s.text)}">${inner}</div>`;
+  }).join('') + '<a class="tile more" href="#stores" data-open="stores"><div class="img">+</div><div class="cap"><span class="name">All stores</span><span class="kind">View</span></div></a>';
+  // STORES 창
   document.getElementById('storeList').innerHTML = STORES.map((s) => {
-    const inner = `<div class="ph" style="${s.img ? `background-image:url('${esc(s.img)}')` : ''}"></div>
+    const inner = `<div class="ph" style="${bg(s.img, 480)}"></div>
       <div><span class="tag">${esc(s.tag)}</span><h3>${esc(s.name)}</h3><p>${esc(s.text)}</p><span class="go">${s.url ? 'Visit store ↗' : 'Coming soon'}</span></div>`;
     return s.url ? `<a class="store" href="${esc(s.url)}" target="_blank" rel="noopener">${inner}</a>` : `<div class="store soon">${inner}</div>`;
   }).join('');
   document.getElementById('storeCount').textContent = STORES.filter((s) => s.url).length;
   document.getElementById('year').textContent = new Date().getFullYear();
-
-  // 사진 슬라이드
-  const stage = document.getElementById('stage');
-  PHOTOS.forEach((f, i) => {
-    const img = new Image();
-    img.src = `${CDN}${f}?width=2400`;
-    img.srcset = [1200, 1800, 2400].map((w) => `${CDN}${f}?width=${w} ${w}w`).join(', ');
-    img.sizes = '100vw'; img.alt = ''; if (i === 0) img.className = 'on';
-    stage.prepend(img);
-  });
-  const imgs = [...stage.querySelectorAll('img')].reverse();
-  let cur = 0;
-  setInterval(() => { imgs[cur].classList.remove('on'); cur = (cur + 1) % imgs.length; imgs[cur].classList.add('on'); }, 5000);
 
   // 창 열기 / 닫기 (주소 #company 처럼 바로 열 수도 있음)
   const panels = ['company', 'stores', 'contact'];
