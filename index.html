@@ -4,84 +4,195 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Solandree LLC</title>
-<meta name="description" content="Solandree LLC runs online stores for the home.">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' fill='%23fff'/%3E%3Ctext x='32' y='45' font-family='Georgia,serif' font-size='40' text-anchor='middle' fill='%23000'%3ES%3C/text%3E%3C/svg%3E">
+<meta name="description" content="Solandree LLC builds and runs curated online stores for the home, including MICASA.">
+<meta property="og:title" content="Solandree LLC">
+<meta property="og:description" content="Curated stores for the home.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://solandree.com/">
+<meta property="og:image" content="https://cdn.shopify.com/s/files/1/0948/2908/4919/files/photo-1618221195710-dd6b41faaea6.jpg?width=1200">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' fill='%23fff'/%3E%3Ctext x='32' y='48' font-family='Didot,Georgia,serif' font-weight='700' font-size='46' text-anchor='middle' fill='%23000'%3ES%3C/text%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:opsz,wght@6..96,400;6..96,500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:opsz,wght@6..96,500;6..96,800&display=swap" rel="stylesheet">
 <style>
-  /* 회사 페이지 (solandree.com): 흰 바탕 · 검은 글자 · 글자 로고만 (미니멀). 샵 목록은 아래 BRANDS 에서 고쳐요. */
-  :root { --bg: #FFFFFF; --text: #000000; --muted: #6E6E6E; --line: #E5E5E5; }
-  @media (prefers-color-scheme: dark) { :root { --bg: #0B0B0B; --text: #F2F2F2; --muted: #9A9A9A; --line: #262626; } }
+  /* solandree.com 회사 페이지: 한 화면(스크롤 없음) · 사진 자동 전환 · COMPANY / STORES / CONTACT 는 옆에서 열리는 창.
+     샵 목록은 아래 STORES, 사진은 PHOTOS 에서 고쳐요. 사진은 MICASA 쇼피파이 파일(Unsplash). */
+  :root { --bg: #FFFFFF; --text: #000000; --muted: #6E6E6E; --line: #E6E6E6; --serif: "Bodoni Moda", Didot, "Bodoni 72", Georgia, serif; --sans: "Helvetica Neue", Helvetica, Arial, sans-serif; }
   * { box-sizing: border-box; }
-  body { margin: 0; background: var(--bg); color: var(--text); font: 13px/1.6 "Helvetica Neue", Helvetica, Arial, sans-serif; letter-spacing: .02em; }
+  html, body { height: 100%; margin: 0; overflow: hidden; background: var(--bg); color: var(--text); font: 14px/1.6 var(--sans); }
   a { color: inherit; text-decoration: none; }
-  .wrap { max-width: 1280px; margin: 0 auto; padding: 0 24px; }
-  header { display: flex; justify-content: space-between; align-items: center; padding: 26px 0; }
-  .word { font-family: "Bodoni Moda", Didot, "Bodoni 72", Georgia, serif; font-weight: 400; font-size: 26px; letter-spacing: .32em; text-transform: uppercase; }
-  nav a { font-size: 11px; text-transform: uppercase; letter-spacing: .14em; margin-left: 28px; }
-  nav a:hover, .brand:hover .go { text-decoration: underline; text-underline-offset: 4px; }
-  .hero { padding: 18vh 0 16vh; text-align: center; }
-  .hero h1 { font-family: "Bodoni Moda", Didot, Georgia, serif; font-weight: 400; font-size: clamp(30px, 5vw, 54px); letter-spacing: .06em; margin: 0 0 18px; }
-  .hero p { margin: 0 auto; max-width: 520px; color: var(--muted); font-size: 13px; }
-  .label { font-size: 11px; text-transform: uppercase; letter-spacing: .18em; margin: 0 0 22px; }
-  .brands { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); border-top: 1px solid var(--line); }
-  .brand { display: flex; flex-direction: column; gap: 14px; padding: 44px 28px 48px; border-bottom: 1px solid var(--line); min-height: 280px; }
-  .brand + .brand { border-left: 1px solid var(--line); }
-  .brand img { width: 100%; aspect-ratio: 4 / 5; object-fit: cover; display: block; margin-bottom: 8px; }
-  .brand .ph { width: 100%; aspect-ratio: 4 / 5; background: #F4F3F1; margin-bottom: 8px; }
-  @media (prefers-color-scheme: dark) { .brand .ph { background: #1A1A1A; } }
-  .brand .tag { font-size: 11px; text-transform: uppercase; letter-spacing: .18em; color: var(--muted); }
-  .brand h3 { margin: 0; font-family: "Bodoni Moda", Didot, Georgia, serif; font-weight: 400; font-size: 30px; letter-spacing: .08em; }
-  .brand p { margin: 0; color: var(--muted); max-width: 360px; flex: 1; }
-  .go { font-size: 11px; text-transform: uppercase; letter-spacing: .16em; }
-  .soon .go { color: var(--muted); }
-  .about { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 28px; padding: 72px 0; }
-  .about p { margin: 0; color: var(--muted); }
-  footer { border-top: 1px solid var(--line); padding: 22px 0 36px; font-size: 11px; text-transform: uppercase; letter-spacing: .14em; color: var(--muted); }
-  @media (max-width: 640px) { nav { display: none; } .brand + .brand { border-left: 0; } .hero { padding: 12vh 0 10vh; } }
+  header { position: fixed; top: 0; left: 0; right: 0; height: 76px; display: flex; align-items: center; justify-content: space-between; padding: 0 28px; background: var(--bg); z-index: 20; }
+  .word { font-family: var(--serif); font-weight: 800; font-size: 34px; letter-spacing: -0.01em; transform: scaleX(.88); transform-origin: left; line-height: 1; }
+  nav.top a { font-size: 12px; text-transform: uppercase; letter-spacing: .14em; margin-left: 30px; padding: 6px 0; border-bottom: 1px solid transparent; }
+  nav.top a:hover, nav.top a.on { border-bottom-color: currentColor; }
+
+  .stage { position: fixed; top: 76px; left: 0; right: 0; bottom: 0; overflow: hidden; background: #E9E4DC; }
+  .stage img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0; transition: opacity 1.4s ease; }
+  .stage img.on { opacity: 1; }
+  .stage::after { content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 55%; background: linear-gradient(to top, rgba(0,0,0,.45), rgba(0,0,0,0)); pointer-events: none; }
+  .tagline { position: absolute; left: 0; right: 0; bottom: 25%; z-index: 2; text-align: center; color: #fff; padding: 0 24px; text-shadow: 0 1px 14px rgba(0,0,0,.35); }
+  .tagline h1 { font-family: var(--serif); font-weight: 500; font-size: clamp(30px, 4.6vw, 60px); letter-spacing: .03em; margin: 0 0 14px; line-height: 1.1; }
+  .tagline .links { display: flex; justify-content: center; flex-wrap: wrap; gap: 10px 34px; }
+  .tagline .links a { font-size: 13px; text-transform: uppercase; letter-spacing: .14em; opacity: .85; }
+  .tagline .links a:hover { opacity: 1; font-weight: 700; }
+  .legal { position: absolute; left: 28px; right: 28px; bottom: 18px; z-index: 2; display: flex; justify-content: space-between; gap: 12px; color: rgba(255,255,255,.85); font-size: 11px; letter-spacing: .1em; text-transform: uppercase; }
+
+  /* 옆에서 열리는 창 */
+  .veil { position: fixed; inset: 76px 0 0 0; background: rgba(0,0,0,.18); opacity: 0; pointer-events: none; transition: opacity .35s; z-index: 10; }
+  .panel { position: fixed; top: 76px; bottom: 0; left: 0; width: min(560px, 100%); background: var(--bg); transform: translateX(-102%); transition: transform .45s cubic-bezier(.2,.7,.2,1); z-index: 11; display: flex; flex-direction: column; }
+  body.open .veil { opacity: 1; pointer-events: auto; }
+  .panel.on { transform: none; }
+  .panel .inner { flex: 1; overflow-y: auto; padding: 34px 40px 40px; }
+  .close { position: absolute; top: 18px; right: 22px; border: 0; background: none; font-size: 26px; line-height: 1; cursor: pointer; color: var(--text); }
+  .label { font-size: 11px; text-transform: uppercase; letter-spacing: .18em; color: var(--muted); margin: 0 0 10px; }
+  .panel h2 { font-family: var(--serif); font-weight: 500; font-size: 36px; letter-spacing: .02em; margin: 0 0 18px; line-height: 1.15; }
+  .panel p { margin: 0 0 14px; color: #222; }
+  .facts { display: grid; grid-template-columns: 1fr 1fr; gap: 1px; background: var(--line); border: 1px solid var(--line); margin: 22px 0 26px; }
+  .facts div { background: var(--bg); padding: 14px 16px; }
+  .facts b { display: block; font-size: 11px; text-transform: uppercase; letter-spacing: .16em; color: var(--muted); font-weight: 400; margin-bottom: 2px; }
+  .pillars { list-style: none; margin: 0; padding: 0; border-top: 1px solid var(--line); }
+  .pillars li { padding: 14px 0; border-bottom: 1px solid var(--line); }
+  .pillars li b { display: block; font-size: 12px; text-transform: uppercase; letter-spacing: .14em; margin-bottom: 2px; }
+  .pillars li span { color: var(--muted); }
+  .store { display: grid; grid-template-columns: 160px 1fr; gap: 20px; padding: 20px 0; border-bottom: 1px solid var(--line); align-items: center; }
+  .store:first-of-type { border-top: 1px solid var(--line); }
+  .store .ph { width: 160px; aspect-ratio: 4 / 5; background: #F4F3F1 center / cover no-repeat; }
+  .store h3 { font-family: var(--serif); font-weight: 800; font-size: 28px; margin: 0 0 2px; transform: scaleX(.9); transform-origin: left; }
+  .store .tag { font-size: 11px; text-transform: uppercase; letter-spacing: .16em; color: var(--muted); }
+  .store p { margin: 8px 0 10px; color: var(--muted); }
+  .go { font-size: 12px; text-transform: uppercase; letter-spacing: .14em; border-bottom: 1px solid currentColor; padding-bottom: 2px; }
+  .soon .go { color: var(--muted); border-bottom-color: transparent; }
+  .contact-block { padding: 16px 0; border-bottom: 1px solid var(--line); }
+  .contact-block:first-of-type { border-top: 1px solid var(--line); }
+  .contact-block b { display: block; font-size: 12px; text-transform: uppercase; letter-spacing: .14em; margin-bottom: 4px; }
+  .contact-block a.mail { border-bottom: 1px solid currentColor; }
+  .contact-block span { color: var(--muted); }
+
+  @media (max-width: 640px) {
+    header { height: 64px; padding: 0 18px; }
+    .word { font-size: 23px; }
+    nav.top { white-space: nowrap; }
+    nav.top a { margin-left: 12px; font-size: 10.5px; letter-spacing: .08em; }
+    .stage, .veil, .panel { top: 64px; }
+    .panel .inner { padding: 28px 22px 32px; }
+    .store { grid-template-columns: 110px 1fr; }
+    .store .ph { width: 110px; }
+    .legal { left: 18px; right: 18px; flex-direction: column; gap: 2px; text-align: center; }
+  }
+  @media (prefers-reduced-motion: reduce) { .stage img, .panel, .veil { transition: none; } }
 </style>
 </head>
 <body>
-<div class="wrap">
-  <header>
-    <a class="word" href="/">Solandree</a>
-    <nav><a href="#stores">Stores</a><a href="#company">Company</a></nav>
-  </header>
+<header>
+  <a class="word" href="#" data-close>SOLANDREE</a>
+  <nav class="top">
+    <a href="#company" data-open="company">Company</a>
+    <a href="#stores" data-open="stores">Stores</a>
+    <a href="#contact" data-open="contact">Contact</a>
+  </nav>
+</header>
 
-  <section class="hero">
-    <h1>Stores for the home</h1>
-    <p>Solandree LLC runs a small group of online stores for everyday living.</p>
-  </section>
+<main class="stage" id="stage">
+  <div class="tagline">
+    <h1>Curated stores for the home</h1>
+    <div class="links">
+      <a href="#company" data-open="company">Company</a>
+      <a href="#stores" data-open="stores">Our stores</a>
+      <a href="#contact" data-open="contact">Contact</a>
+    </div>
+  </div>
+  <div class="legal"><span>© <span id="year">2026</span> Solandree LLC</span><span>Sheridan, Wyoming · United States</span></div>
+</main>
 
-  <section id="stores">
+<div class="veil" data-close></div>
+
+<section class="panel" id="company" aria-label="Company">
+  <button class="close" data-close aria-label="Close">×</button>
+  <div class="inner">
+    <p class="label">Company</p>
+    <h2>Solandree LLC</h2>
+    <p>Solandree is a home goods company. We build and run focused online stores, each with its own identity and a carefully selected range for everyday living.</p>
+    <div class="facts">
+      <div><b>Founded</b>2026</div>
+      <div><b>Based in</b>Wyoming, USA</div>
+      <div><b>Stores</b><span id="storeCount">1</span> live</div>
+      <div><b>Focus</b>Home &amp; living</div>
+    </div>
+    <p class="label">What we stand for</p>
+    <ul class="pillars">
+      <li><b>Curated</b><span>Fewer, better pieces chosen for how people really live.</span></li>
+      <li><b>Simple</b><span>Clear design, honest descriptions and easy shopping.</span></li>
+      <li><b>Reliable</b><span>Secure checkout, tracked US shipping and real people answering email.</span></li>
+    </ul>
+  </div>
+</section>
+
+<section class="panel" id="stores" aria-label="Stores">
+  <button class="close" data-close aria-label="Close">×</button>
+  <div class="inner">
     <p class="label">Our stores</p>
-    <div class="brands" id="brandList"></div>
-  </section>
+    <h2>Brands by Solandree</h2>
+    <div id="storeList"></div>
+  </div>
+</section>
 
-  <section class="about" id="company">
-    <div><p class="label">Company</p><p>Solandree LLC<br>A Wyoming limited liability company</p></div>
-    <div><p class="label">Registered office</p><p>30 N Gould St Ste R<br>Sheridan, WY 82801<br>United States</p></div>
-    <div><p class="label">Contact</p><p>For order questions, please use the contact page of the store you purchased from.</p></div>
-  </section>
-
-  <footer>© <span id="year">2026</span> Solandree LLC</footer>
-</div>
+<section class="panel" id="contact" aria-label="Contact">
+  <button class="close" data-close aria-label="Close">×</button>
+  <div class="inner">
+    <p class="label">Contact</p>
+    <h2>Get in touch</h2>
+    <div class="contact-block"><b>Orders &amp; customer service</b><span>For questions about an order, please contact the store you purchased from.</span><br><a class="mail" href="https://solan-dree.myshopify.com/pages/contact" target="_blank" rel="noopener">MICASA customer service →</a></div>
+    <div class="contact-block"><b>Business inquiries</b><span>Partnerships, wholesale and press.</span><br><a class="mail" href="mailto:contact@solandree.com">contact@solandree.com</a></div>
+    <div class="contact-block"><b>Registered office</b><span>Solandree LLC<br>30 N Gould St Ste R<br>Sheridan, WY 82801<br>United States</span></div>
+  </div>
+</section>
 
 <script>
-  // 브랜드 샵 목록: 새 샵을 열면 여기에 한 줄 추가하고, url 을 넣으면 [Visit] 링크가 생겨요 (새 탭으로 열림).
-  const BRANDS = [
-    { name: 'MICASA', tag: 'Home', img: 'micasa-room.jpg', text: 'Fabrics, tableware, bedding and kitchen essentials for everyday living.', url: 'https://solan-dree.myshopify.com' },
-    { name: 'Furniture', tag: 'Living', text: 'Compact, easy-to-assemble furniture for small spaces.', url: '' },
+  // 샵 목록: 새 샵을 열면 한 줄 추가 (url 있으면 Visit store, 새 탭으로 열림)
+  const CDN = 'https://cdn.shopify.com/s/files/1/0948/2908/4919/files/';
+  const STORES = [
+    { name: 'MICASA', tag: 'Home', img: CDN + 'photo-1618221195710-dd6b41faaea6.jpg?width=480', text: 'Fabrics, tableware, bedding and kitchen essentials for everyday living.', url: 'https://solan-dree.myshopify.com' },
+    { name: 'Furniture', tag: 'Coming soon', img: '', text: 'Compact, easy-to-assemble furniture for small spaces.', url: '' },
   ];
+  // 첫 화면 사진 (5초마다 바뀜)
+  const PHOTOS = ['photo-1618221195710-dd6b41faaea6.jpg', 'photo-1522771739844-6a9f6d5f14af.jpg', 'photo-1616486338812-3dadae4b4ace.jpg', 'photo-1600210492486-724fe5c67fb0.jpg'];
+
   const esc = (s) => String(s).replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
-  document.getElementById('brandList').innerHTML = BRANDS.map((b) => {
-    const inner = `${b.img ? `<img src="${esc(b.img)}" alt="" loading="lazy">` : '<div class="ph"></div>'}<span class="tag">${esc(b.tag)}</span><h3>${esc(b.name)}</h3><p>${esc(b.text)}</p><span class="go">${b.url ? 'Visit store →' : 'Coming soon'}</span>`;
-    return b.url
-      ? `<a class="brand" href="${esc(b.url)}" target="_blank" rel="noopener">${inner}</a>`
-      : `<div class="brand soon">${inner}</div>`;
+  document.getElementById('storeList').innerHTML = STORES.map((s) => {
+    const inner = `<div class="ph" style="${s.img ? `background-image:url('${esc(s.img)}')` : ''}"></div>
+      <div><span class="tag">${esc(s.tag)}</span><h3>${esc(s.name)}</h3><p>${esc(s.text)}</p><span class="go">${s.url ? 'Visit store ↗' : 'Coming soon'}</span></div>`;
+    return s.url ? `<a class="store" href="${esc(s.url)}" target="_blank" rel="noopener">${inner}</a>` : `<div class="store soon">${inner}</div>`;
   }).join('');
+  document.getElementById('storeCount').textContent = STORES.filter((s) => s.url).length;
   document.getElementById('year').textContent = new Date().getFullYear();
+
+  // 사진 슬라이드
+  const stage = document.getElementById('stage');
+  PHOTOS.forEach((f, i) => {
+    const img = new Image();
+    img.src = `${CDN}${f}?width=2400`;
+    img.srcset = [1200, 1800, 2400].map((w) => `${CDN}${f}?width=${w} ${w}w`).join(', ');
+    img.sizes = '100vw'; img.alt = ''; if (i === 0) img.className = 'on';
+    stage.prepend(img);
+  });
+  const imgs = [...stage.querySelectorAll('img')].reverse();
+  let cur = 0;
+  setInterval(() => { imgs[cur].classList.remove('on'); cur = (cur + 1) % imgs.length; imgs[cur].classList.add('on'); }, 5000);
+
+  // 창 열기 / 닫기 (주소 #company 처럼 바로 열 수도 있음)
+  const panels = ['company', 'stores', 'contact'];
+  function open(id) {
+    panels.forEach((p) => document.getElementById(p).classList.toggle('on', p === id));
+    document.querySelectorAll('nav.top a').forEach((a) => a.classList.toggle('on', a.dataset.open === id));
+    document.body.classList.toggle('open', Boolean(id));
+    if (location.hash !== (id ? `#${id}` : '')) history.replaceState(null, '', id ? `#${id}` : location.pathname);
+  }
+  document.addEventListener('click', (e) => {
+    const o = e.target.closest('[data-open]'), c = e.target.closest('[data-close]');
+    if (o) { e.preventDefault(); open(o.dataset.open); } else if (c) { e.preventDefault(); open(null); }
+  });
+  document.addEventListener('keydown', (e) => { if (e.key === 'Escape') open(null); });
+  const start = location.hash.slice(1); if (panels.includes(start)) open(start);
 </script>
 </body>
 </html>
