@@ -16,7 +16,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:opsz,wght@6..96,500;6..96,800&display=swap" rel="stylesheet">
 <style>
   /* solandree.com 회사 페이지: 흰 바탕 · 가운데 SOLANDREE · 샵 카드(사진)를 나란히 = "여러 샵이 모인 회사" · 한 화면(스크롤 없음).
-     COMPANY / STORES / CONTACT 는 옆에서 열리는 창. 샵 목록은 아래 STORES 에서 고쳐요. 사진은 MICASA 쇼피파이 파일(Unsplash). */
+     COMPANY / STORES / CONTACT 를 누르면 가운데 화면이 바로 바뀜(옆 창 없음). 샵 목록은 아래 STORES 에서 고쳐요. 사진은 MICASA 쇼피파이 파일(Unsplash). */
   :root { --bg: #FFFFFF; --text: #000000; --muted: #707070; --line: #E6E6E6; --serif: "Bodoni Moda", Didot, "Bodoni 72", Georgia, serif; --sans: "Helvetica Neue", Helvetica, Arial, sans-serif; }
   * { box-sizing: border-box; }
   html, body { height: 100%; margin: 0; overflow: hidden; background: var(--bg); color: var(--text); font: 14px/1.6 var(--sans); }
@@ -29,66 +29,61 @@
   nav.top a { font-size: 12px; text-transform: uppercase; letter-spacing: .16em; padding: 4px 0; border-bottom: 1px solid transparent; }
   nav.top a:hover, nav.top a.on { border-bottom-color: currentColor; }
 
-  /* 샵 카드 벽 */
-  main.wall { flex: 1; min-height: 0; display: flex; align-items: center; justify-content: center; gap: 22px; padding: 26px 40px 10px; }
+  /* 가운데 화면: STORES(샵 카드) · COMPANY · CONTACT 중 하나만 보임 (옆 창 없음) */
+  main { flex: 1; min-height: 0; position: relative; }
+  .view { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; padding: 22px 40px 8px; opacity: 0; visibility: hidden; transition: opacity .45s ease, visibility .45s; overflow: auto; }
+  .view.on { opacity: 1; visibility: visible; }
+
+  /* STORES: 샵 카드 벽 */
+  .wall { display: flex; align-items: center; justify-content: center; gap: 22px; }
   .tile { position: relative; flex: none; height: min(54vh, 560px, calc((100vw - 146px) / 4 * 4 / 3 + 40px)); aspect-ratio: 3 / 4.4; display: flex; flex-direction: column; }
   .tile .img { flex: 1; background: #F2F1EE center / cover no-repeat; overflow: hidden; }
   .tile .img span { display: block; width: 100%; height: 100%; background: inherit; transition: transform .8s ease; }
   a.tile:hover .img span { transform: scale(1.04); }
   .tile.soon .img { filter: grayscale(1); opacity: .55; }
-  .tile.more .img { background: none; border: 1px solid var(--line); display: flex; align-items: center; justify-content: center; font-family: var(--serif); font-size: 46px; color: #BDBDBD; }
+  .tile.more .img { background: none; border: 1px solid var(--line); display: flex; align-items: center; justify-content: center; text-align: center; font-size: 10.5px; text-transform: uppercase; letter-spacing: .18em; color: #A8A8A8; padding: 20px; }
   .tile .cap { flex: none; display: flex; justify-content: space-between; align-items: baseline; gap: 10px; padding-top: 12px; }
   .tile .name { font-family: var(--serif); font-weight: 800; font-size: 22px; line-height: 1; }
   .tile .kind { font-size: 10.5px; text-transform: uppercase; letter-spacing: .16em; color: var(--muted); white-space: nowrap; }
   .tile .kind.live { color: var(--text); }
+  .tile p.desc { display: none; }
+
   footer { flex: none; display: flex; justify-content: space-between; gap: 12px; padding: 12px 28px 18px; font-size: 10.5px; text-transform: uppercase; letter-spacing: .14em; color: var(--muted); }
 
-  /* 옆에서 열리는 창 */
-  .veil { position: fixed; inset: 0; background: rgba(255,255,255,.6); opacity: 0; pointer-events: none; transition: opacity .35s; z-index: 30; }
-  .panel { position: fixed; top: 0; bottom: 0; left: 0; width: min(560px, 100%); background: var(--bg); border-right: 1px solid var(--line); transform: translateX(-102%); transition: transform .45s cubic-bezier(.2,.7,.2,1); z-index: 31; display: flex; flex-direction: column; }
-  body.open .veil { opacity: 1; pointer-events: auto; }
-  .panel.on { transform: none; }
-  .panel .inner { flex: 1; overflow-y: auto; padding: 44px 40px 40px; }
-  .close { position: absolute; top: 18px; right: 22px; border: 0; background: none; font-size: 26px; line-height: 1; cursor: pointer; color: var(--text); }
+  /* COMPANY · CONTACT */
   .label { font-size: 11px; text-transform: uppercase; letter-spacing: .18em; color: var(--muted); margin: 0 0 10px; }
-  .panel h2 { font-family: var(--serif); font-weight: 500; font-size: 36px; letter-spacing: .02em; margin: 0 0 18px; line-height: 1.15; }
-  .panel p { margin: 0 0 14px; color: #222; }
-  .facts { display: grid; grid-template-columns: 1fr 1fr; gap: 1px; background: var(--line); border: 1px solid var(--line); margin: 22px 0 26px; }
+  h2 { font-family: var(--serif); font-weight: 500; font-size: clamp(28px, 3vw, 40px); letter-spacing: .02em; margin: 0 0 16px; line-height: 1.15; }
+  .company { width: 100%; max-width: 1000px; display: grid; grid-template-columns: 1.15fr 1fr; gap: 64px; align-items: start; }
+  .company p { margin: 0 0 14px; color: #222; max-width: 460px; }
+  .facts { display: grid; grid-template-columns: 1fr 1fr; gap: 1px; background: var(--line); border: 1px solid var(--line); margin: 22px 0 0; }
   .facts div { background: var(--bg); padding: 14px 16px; }
   .facts b { display: block; font-size: 11px; text-transform: uppercase; letter-spacing: .16em; color: var(--muted); font-weight: 400; margin-bottom: 2px; }
   .pillars { list-style: none; margin: 0; padding: 0; border-top: 1px solid var(--line); }
-  .pillars li { padding: 14px 0; border-bottom: 1px solid var(--line); }
+  .pillars li { padding: 16px 0; border-bottom: 1px solid var(--line); }
   .pillars li b { display: block; font-size: 12px; text-transform: uppercase; letter-spacing: .14em; margin-bottom: 2px; }
   .pillars li span { color: var(--muted); }
-  .store { display: grid; grid-template-columns: 140px 1fr; gap: 20px; padding: 20px 0; border-bottom: 1px solid var(--line); align-items: center; }
-  .store:first-of-type { border-top: 1px solid var(--line); }
-  .store .ph { width: 140px; aspect-ratio: 3 / 4; background: #F2F1EE center / cover no-repeat; }
-  .store.soon .ph { filter: grayscale(1); opacity: .55; }
-  .store h3 { font-family: var(--serif); font-weight: 800; font-size: 28px; margin: 0 0 2px; }
-  .store .tag { font-size: 11px; text-transform: uppercase; letter-spacing: .16em; color: var(--muted); }
-  .store p { margin: 8px 0 10px; color: var(--muted); }
-  .go { font-size: 12px; text-transform: uppercase; letter-spacing: .14em; border-bottom: 1px solid currentColor; padding-bottom: 2px; }
-  .soon .go { color: var(--muted); border-bottom-color: transparent; }
-  .contact-block { padding: 16px 0; border-bottom: 1px solid var(--line); }
-  .contact-block:first-of-type { border-top: 1px solid var(--line); }
-  .contact-block b { display: block; font-size: 12px; text-transform: uppercase; letter-spacing: .14em; margin-bottom: 4px; }
-  .contact-block a.mail { border-bottom: 1px solid currentColor; }
-  .contact-block span { color: var(--muted); }
+  .contact { width: 100%; max-width: 1000px; text-align: center; }
+  .contact .cols { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: var(--line); border: 1px solid var(--line); margin-top: 26px; text-align: left; }
+  .contact .cols > div { background: var(--bg); padding: 26px 26px 28px; }
+  .contact b { display: block; font-size: 12px; text-transform: uppercase; letter-spacing: .14em; margin-bottom: 8px; }
+  .contact span { color: var(--muted); }
+  .contact a.mail { display: inline-block; margin-top: 10px; border-bottom: 1px solid currentColor; }
 
   @media (max-width: 900px) {
-    main.wall { justify-content: flex-start; overflow-x: auto; scroll-snap-type: x mandatory; padding: 20px 20px 8px; gap: 14px; }
-    .tile { height: min(52vh, 460px); scroll-snap-align: center; flex: none; }
+    .view { align-items: flex-start; padding: 18px 20px 8px; }
+    .view.stores-view { align-items: center; }
+    .wall { justify-content: flex-start; overflow-x: auto; scroll-snap-type: x mandatory; width: 100%; gap: 14px; padding-bottom: 6px; }
+    .tile { height: min(52vh, 460px); scroll-snap-align: center; }
+    .company { grid-template-columns: 1fr; gap: 28px; }
+    .contact .cols { grid-template-columns: 1fr; }
   }
   @media (max-width: 640px) {
     header { padding-top: 22px; }
     nav.top { gap: 22px; margin-top: 14px; }
     nav.top a { font-size: 11px; letter-spacing: .12em; }
-    .panel .inner { padding: 40px 22px 32px; }
-    .store { grid-template-columns: 100px 1fr; }
-    .store .ph { width: 100px; }
     footer { flex-direction: column; gap: 2px; text-align: center; }
   }
-  @media (prefers-reduced-motion: reduce) { .panel, .veil, .tile .img span { transition: none; } }
+  @media (prefers-reduced-motion: reduce) { .view, .tile .img span { transition: none; } }
 </style>
 </head>
 <body>
@@ -102,55 +97,50 @@
   </nav>
 </header>
 
-<main class="wall" id="wall" aria-label="Our stores"></main>
+<main>
+  <section class="view stores-view on" id="stores" aria-label="Our stores"><div class="wall" id="wall"></div></section>
+
+  <section class="view" id="company" aria-label="Company">
+    <div class="company">
+      <div>
+        <p class="label">Company</p>
+        <h2>Solandree LLC</h2>
+        <p>Solandree is a home goods company. We build and run focused online stores, each with its own identity and a carefully selected range for everyday living.</p>
+        <div class="facts">
+          <div><b>Founded</b>2026</div>
+          <div><b>Based in</b>Wyoming, USA</div>
+          <div><b>Stores</b><span id="storeCount">1</span> live</div>
+          <div><b>Focus</b>Home &amp; living</div>
+        </div>
+      </div>
+      <div>
+        <p class="label">What we stand for</p>
+        <ul class="pillars">
+          <li><b>Curated</b><span>Fewer, better pieces chosen for how people really live.</span></li>
+          <li><b>Simple</b><span>Clear design, honest descriptions and easy shopping.</span></li>
+          <li><b>Reliable</b><span>Secure checkout, tracked US shipping and real people answering email.</span></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="view" id="contact" aria-label="Contact">
+    <div class="contact">
+      <p class="label">Contact</p>
+      <h2>Get in touch</h2>
+      <div class="cols">
+        <div><b>Orders &amp; customer service</b><span>For questions about an order, please contact the store you purchased from.</span><br><a class="mail" href="https://solan-dree.myshopify.com/pages/contact" target="_blank" rel="noopener">MICASA customer service →</a></div>
+        <div><b>Business inquiries</b><span>Partnerships, wholesale and press.</span><br><a class="mail" href="mailto:contact@solandree.com">contact@solandree.com</a></div>
+        <div><b>Registered office</b><span>Solandree LLC<br>30 N Gould St Ste R<br>Sheridan, WY 82801<br>United States</span></div>
+      </div>
+    </div>
+  </section>
+</main>
 
 <footer><span>© <span id="year">2026</span> Solandree LLC</span><span>Sheridan, Wyoming · United States</span></footer>
 
-<div class="veil" data-close></div>
-
-<section class="panel" id="company" aria-label="Company">
-  <button class="close" data-close aria-label="Close">×</button>
-  <div class="inner">
-    <p class="label">Company</p>
-    <h2>Solandree LLC</h2>
-    <p>Solandree is a home goods company. We build and run focused online stores, each with its own identity and a carefully selected range for everyday living.</p>
-    <div class="facts">
-      <div><b>Founded</b>2026</div>
-      <div><b>Based in</b>Wyoming, USA</div>
-      <div><b>Stores</b><span id="storeCount">1</span> live</div>
-      <div><b>Focus</b>Home &amp; living</div>
-    </div>
-    <p class="label">What we stand for</p>
-    <ul class="pillars">
-      <li><b>Curated</b><span>Fewer, better pieces chosen for how people really live.</span></li>
-      <li><b>Simple</b><span>Clear design, honest descriptions and easy shopping.</span></li>
-      <li><b>Reliable</b><span>Secure checkout, tracked US shipping and real people answering email.</span></li>
-    </ul>
-  </div>
-</section>
-
-<section class="panel" id="stores" aria-label="Stores">
-  <button class="close" data-close aria-label="Close">×</button>
-  <div class="inner">
-    <p class="label">Our stores</p>
-    <h2>Brands by Solandree</h2>
-    <div id="storeList"></div>
-  </div>
-</section>
-
-<section class="panel" id="contact" aria-label="Contact">
-  <button class="close" data-close aria-label="Close">×</button>
-  <div class="inner">
-    <p class="label">Contact</p>
-    <h2>Get in touch</h2>
-    <div class="contact-block"><b>Orders &amp; customer service</b><span>For questions about an order, please contact the store you purchased from.</span><br><a class="mail" href="https://solan-dree.myshopify.com/pages/contact" target="_blank" rel="noopener">MICASA customer service →</a></div>
-    <div class="contact-block"><b>Business inquiries</b><span>Partnerships, wholesale and press.</span><br><a class="mail" href="mailto:contact@solandree.com">contact@solandree.com</a></div>
-    <div class="contact-block"><b>Registered office</b><span>Solandree LLC<br>30 N Gould St Ste R<br>Sheridan, WY 82801<br>United States</span></div>
-  </div>
-</section>
-
 <script>
-  // 샵 목록: 새 샵을 열면 한 줄 추가 (url 있으면 Visit store, 새 탭으로 열림)
+  // 샵 목록: 새 샵을 열면 한 줄 추가 (url 있으면 Visit, 새 탭으로 열림)
   const CDN = 'https://cdn.shopify.com/s/files/1/0948/2908/4919/files/';
   const STORES = [
     { name: 'MICASA', tag: 'Home & living', img: CDN + 'photo-1618221195710-dd6b41faaea6.jpg', text: 'Fabrics, tableware, bedding and kitchen essentials for everyday living.', url: 'https://solan-dree.myshopify.com' },
@@ -160,35 +150,30 @@
 
   const esc = (s) => String(s).replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
   const bg = (u, w) => (u ? `background-image:url('${esc(u)}?width=${w}')` : '');
-  // 첫 화면: 샵 카드를 나란히 (+ 맨 끝에 "더 생길 샵" 빈 카드)
+  // STORES 화면: 샵 카드를 나란히 (+ 맨 끝에 "더 생길 샵" 빈 카드)
   document.getElementById('wall').innerHTML = STORES.map((s) => {
     const inner = `<div class="img"><span style="${bg(s.img, 900)}"></span></div>
       <div class="cap"><span class="name">${esc(s.name)}</span><span class="kind${s.url ? ' live' : ''}">${s.url ? 'Visit ↗' : esc(s.tag)}</span></div>`;
     return s.url ? `<a class="tile" href="${esc(s.url)}" target="_blank" rel="noopener" title="${esc(s.text)}">${inner}</a>` : `<div class="tile soon" title="${esc(s.text)}">${inner}</div>`;
-  }).join('') + '<a class="tile more" href="#stores" data-open="stores"><div class="img">+</div><div class="cap"><span class="name">All stores</span><span class="kind">View</span></div></a>';
-  // STORES 창
-  document.getElementById('storeList').innerHTML = STORES.map((s) => {
-    const inner = `<div class="ph" style="${bg(s.img, 480)}"></div>
-      <div><span class="tag">${esc(s.tag)}</span><h3>${esc(s.name)}</h3><p>${esc(s.text)}</p><span class="go">${s.url ? 'Visit store ↗' : 'Coming soon'}</span></div>`;
-    return s.url ? `<a class="store" href="${esc(s.url)}" target="_blank" rel="noopener">${inner}</a>` : `<div class="store soon">${inner}</div>`;
-  }).join('');
+  }).join('') + '<div class="tile more"><div class="img">More stores<br>coming soon</div><div class="cap"><span class="name">&nbsp;</span></div></div>';
   document.getElementById('storeCount').textContent = STORES.filter((s) => s.url).length;
   document.getElementById('year').textContent = new Date().getFullYear();
 
-  // 창 열기 / 닫기 (주소 #company 처럼 바로 열 수도 있음)
-  const panels = ['company', 'stores', 'contact'];
-  function open(id) {
-    panels.forEach((p) => document.getElementById(p).classList.toggle('on', p === id));
+  // 메뉴를 누르면 가운데 화면만 바뀜 (주소 #company 처럼 바로 열 수도 있음, 로고 = STORES)
+  const views = ['stores', 'company', 'contact'];
+  function show(id) {
+    if (!views.includes(id)) id = 'stores';
+    views.forEach((v) => document.getElementById(v).classList.toggle('on', v === id));
     document.querySelectorAll('nav.top a').forEach((a) => a.classList.toggle('on', a.dataset.open === id));
-    document.body.classList.toggle('open', Boolean(id));
-    if (location.hash !== (id ? `#${id}` : '')) history.replaceState(null, '', id ? `#${id}` : location.pathname);
+    const hash = id === 'stores' ? '' : `#${id}`;
+    if (location.hash !== hash) history.replaceState(null, '', hash || location.pathname);
   }
   document.addEventListener('click', (e) => {
     const o = e.target.closest('[data-open]'), c = e.target.closest('[data-close]');
-    if (o) { e.preventDefault(); open(o.dataset.open); } else if (c) { e.preventDefault(); open(null); }
+    if (o) { e.preventDefault(); show(o.dataset.open); } else if (c) { e.preventDefault(); show('stores'); }
   });
-  document.addEventListener('keydown', (e) => { if (e.key === 'Escape') open(null); });
-  const start = location.hash.slice(1); if (panels.includes(start)) open(start);
+  document.addEventListener('keydown', (e) => { if (e.key === 'Escape') show('stores'); });
+  show(location.hash.slice(1));
 </script>
 </body>
 </html>
