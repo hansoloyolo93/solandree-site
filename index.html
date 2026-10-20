@@ -4,98 +4,80 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Solandree LLC</title>
-<meta name="description" content="Solandree LLC runs focused online stores for the kitchen and home.">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%231C1917'/%3E%3Ctext x='32' y='43' font-family='Georgia,serif' font-size='34' text-anchor='middle' fill='%23FFFBF6'%3ES%3C/text%3E%3C/svg%3E">
+<meta name="description" content="Solandree LLC runs online stores for the home.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' fill='%23fff'/%3E%3Ctext x='32' y='45' font-family='Georgia,serif' font-size='40' text-anchor='middle' fill='%23000'%3ES%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:opsz,wght@6..96,400;6..96,500&display=swap" rel="stylesheet">
 <style>
-  /* 회사 소개 페이지 (solandree.com). 브랜드 샵 목록은 아래 BRANDS 에서 고쳐요. */
-  :root {
-    --bg: #FFFBF6; --surface: #FFFFFF; --text: #1C1917; --muted: #6B625B; --line: #EAE2D8;
-    --accent: #C2410C; --soon: #F3EDE6;
-  }
-  @media (prefers-color-scheme: dark) {
-    :root { --bg: #161311; --surface: #201C19; --text: #F5EFE8; --muted: #A99F95; --line: #342D28; --accent: #F07B3F; --soon: #26211D; }
-  }
+  /* 회사 페이지 (solandree.com): 흰 바탕 · 검은 글자 · 글자 로고만 (미니멀). 샵 목록은 아래 BRANDS 에서 고쳐요. */
+  :root { --bg: #FFFFFF; --text: #000000; --muted: #6E6E6E; --line: #E5E5E5; }
+  @media (prefers-color-scheme: dark) { :root { --bg: #0B0B0B; --text: #F2F2F2; --muted: #9A9A9A; --line: #262626; } }
   * { box-sizing: border-box; }
-  body { margin: 0; background: var(--bg); color: var(--text); font: 16px/1.6 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; }
-  .wrap { max-width: 1040px; margin: 0 auto; padding: 0 20px; }
-  header { padding: 28px 0; display: flex; justify-content: space-between; align-items: center; }
-  .mark { font-family: Georgia, "Times New Roman", serif; font-size: 22px; letter-spacing: .14em; font-weight: 700; }
-  nav a { color: var(--muted); text-decoration: none; margin-left: 20px; font-size: 15px; }
-  nav a:hover { color: var(--text); }
-  .hero { padding: 64px 0 48px; }
-  .hero h1 { font-family: Georgia, "Times New Roman", serif; font-size: clamp(34px, 6vw, 56px); line-height: 1.1; margin: 0 0 16px; font-weight: 600; }
-  .hero p { color: var(--muted); font-size: 19px; max-width: 620px; margin: 0; }
-  h2 { font-family: Georgia, "Times New Roman", serif; font-size: 28px; font-weight: 600; margin: 0 0 20px; }
-  .brands { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 18px; padding-bottom: 56px; }
-  .brand { background: var(--surface); border: 1px solid var(--line); border-radius: 18px; padding: 26px; display: flex; flex-direction: column; gap: 10px; min-height: 220px; }
-  .brand.soon { background: var(--soon); }
-  .card-link { color: inherit; text-decoration: none; display: flex; }
-  .card-link .brand { flex: 1; transition: transform .15s, box-shadow .15s; }
-  .card-link:hover .brand { transform: translateY(-3px); box-shadow: 0 10px 28px rgba(0,0,0,.08); }
-  .tag { font-size: 12px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--accent); }
-  .brand h3 { margin: 0; font-size: 22px; }
-  .brand p { margin: 0; color: var(--muted); flex: 1; }
-  .btn { align-self: flex-start; display: inline-block; background: var(--text); color: var(--bg); text-decoration: none; padding: 10px 18px; border-radius: 999px; font-weight: 600; font-size: 15px; }
-  .btn:hover { opacity: .88; }
-  .muted-pill { align-self: flex-start; border: 1px dashed var(--line); color: var(--muted); padding: 8px 16px; border-radius: 999px; font-size: 14px; }
-  .about { border-top: 1px solid var(--line); padding: 48px 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 28px; }
-  .about p { margin: 0 0 8px; color: var(--muted); }
-  .about b { color: var(--text); }
-  footer { border-top: 1px solid var(--line); padding: 24px 0 40px; color: var(--muted); font-size: 14px; }
-  @media (max-width: 560px) { nav { display: none; } .hero { padding: 36px 0 32px; } }
+  body { margin: 0; background: var(--bg); color: var(--text); font: 13px/1.6 "Helvetica Neue", Helvetica, Arial, sans-serif; letter-spacing: .02em; }
+  a { color: inherit; text-decoration: none; }
+  .wrap { max-width: 1280px; margin: 0 auto; padding: 0 24px; }
+  header { display: flex; justify-content: space-between; align-items: center; padding: 26px 0; }
+  .word { font-family: "Bodoni Moda", Didot, "Bodoni 72", Georgia, serif; font-weight: 400; font-size: 26px; letter-spacing: .32em; text-transform: uppercase; }
+  nav a { font-size: 11px; text-transform: uppercase; letter-spacing: .14em; margin-left: 28px; }
+  nav a:hover, .brand:hover .go { text-decoration: underline; text-underline-offset: 4px; }
+  .hero { padding: 18vh 0 16vh; text-align: center; }
+  .hero h1 { font-family: "Bodoni Moda", Didot, Georgia, serif; font-weight: 400; font-size: clamp(30px, 5vw, 54px); letter-spacing: .06em; margin: 0 0 18px; }
+  .hero p { margin: 0 auto; max-width: 520px; color: var(--muted); font-size: 13px; }
+  .label { font-size: 11px; text-transform: uppercase; letter-spacing: .18em; margin: 0 0 22px; }
+  .brands { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); border-top: 1px solid var(--line); }
+  .brand { display: flex; flex-direction: column; gap: 14px; padding: 44px 28px 48px; border-bottom: 1px solid var(--line); min-height: 280px; }
+  .brand + .brand { border-left: 1px solid var(--line); }
+  .brand .tag { font-size: 11px; text-transform: uppercase; letter-spacing: .18em; color: var(--muted); }
+  .brand h3 { margin: 0; font-family: "Bodoni Moda", Didot, Georgia, serif; font-weight: 400; font-size: 30px; letter-spacing: .08em; }
+  .brand p { margin: 0; color: var(--muted); max-width: 360px; flex: 1; }
+  .go { font-size: 11px; text-transform: uppercase; letter-spacing: .16em; }
+  .soon .go { color: var(--muted); }
+  .about { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 28px; padding: 72px 0; }
+  .about p { margin: 0; color: var(--muted); }
+  footer { border-top: 1px solid var(--line); padding: 22px 0 36px; font-size: 11px; text-transform: uppercase; letter-spacing: .14em; color: var(--muted); }
+  @media (max-width: 640px) { nav { display: none; } .brand + .brand { border-left: 0; } .hero { padding: 12vh 0 10vh; } }
 </style>
 </head>
 <body>
 <div class="wrap">
   <header>
-    <div class="mark">SOLANDREE</div>
-    <nav><a href="#brands">Our stores</a><a href="#about">Company</a></nav>
+    <a class="word" href="/">Solandree</a>
+    <nav><a href="#stores">Stores</a><a href="#company">Company</a></nav>
   </header>
 
   <section class="hero">
-    <h1>Focused online stores<br>for the kitchen and home.</h1>
-    <p>Solandree LLC runs a small family of online stores, each dedicated to one part of everyday living.</p>
+    <h1>Stores for the home</h1>
+    <p>Solandree LLC runs a small group of online stores for everyday living.</p>
   </section>
 
-  <section id="brands">
-    <h2>Our stores</h2>
+  <section id="stores">
+    <p class="label">Our stores</p>
     <div class="brands" id="brandList"></div>
   </section>
 
-  <section class="about" id="about">
-    <div>
-      <h2>Company</h2>
-      <p><b>Solandree LLC</b></p>
-      <p>A Wyoming limited liability company.</p>
-    </div>
-    <div>
-      <h2>Registered office</h2>
-      <p>30 N Gould St Ste R<br>Sheridan, WY 82801<br>United States</p>
-    </div>
-    <div>
-      <h2>Contact</h2>
-      <p>For order questions, please use the contact page of the store you purchased from.</p>
-    </div>
+  <section class="about" id="company">
+    <div><p class="label">Company</p><p>Solandree LLC<br>A Wyoming limited liability company</p></div>
+    <div><p class="label">Registered office</p><p>30 N Gould St Ste R<br>Sheridan, WY 82801<br>United States</p></div>
+    <div><p class="label">Contact</p><p>For order questions, please use the contact page of the store you purchased from.</p></div>
   </section>
 
-  <footer>© <span id="year">2026</span> Solandree LLC. All rights reserved.</footer>
+  <footer>© <span id="year">2026</span> Solandree LLC</footer>
 </div>
 
 <script>
-  // 브랜드 샵 목록: 새 샵을 열면 여기에 한 줄 추가하고, url 을 넣으면 [Visit store] 버튼이 생겨요.
+  // 브랜드 샵 목록: 새 샵을 열면 여기에 한 줄 추가하고, url 을 넣으면 [Visit] 링크가 생겨요 (새 탭으로 열림).
   const BRANDS = [
-    { name: 'GrillGenius', tag: 'BBQ & Kitchen', text: 'Grilling tools, thermometers and kitchen gear for backyard cooks.', url: 'https://solan-dree.myshopify.com' },
-    { name: 'Furniture', tag: 'Home Furniture', text: 'Compact, easy-to-assemble furniture for small spaces.', url: '' },
-    { name: 'Home Essentials', tag: 'Household', text: 'Organization, cleaning and everyday essentials for the home.', url: '' },
+    { name: 'Casa casa', tag: 'Home', text: 'Fabrics, tableware, bedding and kitchen essentials for everyday living.', url: 'https://solan-dree.myshopify.com' },
+    { name: 'Furniture', tag: 'Living', text: 'Compact, easy-to-assemble furniture for small spaces.', url: '' },
   ];
   const esc = (s) => String(s).replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
-  document.getElementById('brandList').innerHTML = BRANDS.map((b) => `
-    <article class="brand${b.url ? '' : ' soon'}">
-      <span class="tag">${esc(b.tag)}</span>
-      <h3>${esc(b.name)}</h3>
-      <p>${esc(b.text)}</p>
-      ${b.url ? `<span class="btn">Shop ${esc(b.tag)} →</span>` : '<span class="muted-pill">Coming soon</span>'}
-    </article>`).map((html, i) => (BRANDS[i].url ? `<a class="card-link" href="${esc(BRANDS[i].url)}" target="_blank" rel="noopener">${html}</a>` : html)).join('');
+  document.getElementById('brandList').innerHTML = BRANDS.map((b) => {
+    const inner = `<span class="tag">${esc(b.tag)}</span><h3>${esc(b.name)}</h3><p>${esc(b.text)}</p><span class="go">${b.url ? 'Visit store →' : 'Coming soon'}</span>`;
+    return b.url
+      ? `<a class="brand" href="${esc(b.url)}" target="_blank" rel="noopener">${inner}</a>`
+      : `<div class="brand soon">${inner}</div>`;
+  }).join('');
   document.getElementById('year').textContent = new Date().getFullYear();
 </script>
 </body>
