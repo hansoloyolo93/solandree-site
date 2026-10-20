@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Solandree LLC</title>
+<meta name="description" content="Solandree LLC runs focused online stores for the kitchen and home.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%231C1917'/%3E%3Ctext x='32' y='43' font-family='Georgia,serif' font-size='34' text-anchor='middle' fill='%23FFFBF6'%3ES%3C/text%3E%3C/svg%3E">
+<style>
+  /* 회사 소개 페이지 (solandree.com). 브랜드 샵 목록은 아래 BRANDS 에서 고쳐요. */
+  :root {
+    --bg: #FFFBF6; --surface: #FFFFFF; --text: #1C1917; --muted: #6B625B; --line: #EAE2D8;
+    --accent: #C2410C; --soon: #F3EDE6;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root { --bg: #161311; --surface: #201C19; --text: #F5EFE8; --muted: #A99F95; --line: #342D28; --accent: #F07B3F; --soon: #26211D; }
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--bg); color: var(--text); font: 16px/1.6 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; }
+  .wrap { max-width: 1040px; margin: 0 auto; padding: 0 20px; }
+  header { padding: 28px 0; display: flex; justify-content: space-between; align-items: center; }
+  .mark { font-family: Georgia, "Times New Roman", serif; font-size: 22px; letter-spacing: .14em; font-weight: 700; }
+  nav a { color: var(--muted); text-decoration: none; margin-left: 20px; font-size: 15px; }
+  nav a:hover { color: var(--text); }
+  .hero { padding: 64px 0 48px; }
+  .hero h1 { font-family: Georgia, "Times New Roman", serif; font-size: clamp(34px, 6vw, 56px); line-height: 1.1; margin: 0 0 16px; font-weight: 600; }
+  .hero p { color: var(--muted); font-size: 19px; max-width: 620px; margin: 0; }
+  h2 { font-family: Georgia, "Times New Roman", serif; font-size: 28px; font-weight: 600; margin: 0 0 20px; }
+  .brands { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 18px; padding-bottom: 56px; }
+  .brand { background: var(--surface); border: 1px solid var(--line); border-radius: 18px; padding: 26px; display: flex; flex-direction: column; gap: 10px; min-height: 220px; }
+  .brand.soon { background: var(--soon); }
+  .tag { font-size: 12px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--accent); }
+  .brand h3 { margin: 0; font-size: 22px; }
+  .brand p { margin: 0; color: var(--muted); flex: 1; }
+  .btn { align-self: flex-start; display: inline-block; background: var(--text); color: var(--bg); text-decoration: none; padding: 10px 18px; border-radius: 999px; font-weight: 600; font-size: 15px; }
+  .btn:hover { opacity: .88; }
+  .muted-pill { align-self: flex-start; border: 1px dashed var(--line); color: var(--muted); padding: 8px 16px; border-radius: 999px; font-size: 14px; }
+  .about { border-top: 1px solid var(--line); padding: 48px 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 28px; }
+  .about p { margin: 0 0 8px; color: var(--muted); }
+  .about b { color: var(--text); }
+  footer { border-top: 1px solid var(--line); padding: 24px 0 40px; color: var(--muted); font-size: 14px; }
+  @media (max-width: 560px) { nav { display: none; } .hero { padding: 36px 0 32px; } }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <div class="mark">SOLANDREE</div>
+    <nav><a href="#brands">Our stores</a><a href="#about">Company</a></nav>
+  </header>
+
+  <section class="hero">
+    <h1>Focused online stores<br>for the kitchen and home.</h1>
+    <p>Solandree LLC runs a small family of online stores, each dedicated to one part of everyday living.</p>
+  </section>
+
+  <section id="brands">
+    <h2>Our stores</h2>
+    <div class="brands" id="brandList"></div>
+  </section>
+
+  <section class="about" id="about">
+    <div>
+      <h2>Company</h2>
+      <p><b>Solandree LLC</b></p>
+      <p>A Wyoming limited liability company.</p>
+    </div>
+    <div>
+      <h2>Registered office</h2>
+      <p>30 N Gould St Ste R<br>Sheridan, WY 82801<br>United States</p>
+    </div>
+    <div>
+      <h2>Contact</h2>
+      <p>For order questions, please use the contact page of the store you purchased from.</p>
+    </div>
+  </section>
+
+  <footer>© <span id="year">2026</span> Solandree LLC. All rights reserved.</footer>
+</div>
+
+<script>
+  // 브랜드 샵 목록: 새 샵을 열면 여기에 한 줄 추가하고, url 을 넣으면 [Visit store] 버튼이 생겨요.
+  const BRANDS = [
+    { name: 'Sol & Ree', tag: 'BBQ & Kitchen', text: 'Grilling tools, thermometers and kitchen gear for backyard cooks.', url: 'https://5n1fgw-mw.myshopify.com' },
+    { name: 'Furniture', tag: 'Home Furniture', text: 'Compact, easy-to-assemble furniture for small spaces.', url: '' },
+    { name: 'Home Essentials', tag: 'Household', text: 'Organization, cleaning and everyday essentials for the home.', url: '' },
+  ];
+  const esc = (s) => String(s).replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+  document.getElementById('brandList').innerHTML = BRANDS.map((b) => `
+    <article class="brand${b.url ? '' : ' soon'}">
+      <span class="tag">${esc(b.tag)}</span>
+      <h3>${esc(b.name)}</h3>
+      <p>${esc(b.text)}</p>
+      ${b.url ? `<a class="btn" href="${esc(b.url)}" rel="noopener">Visit store →</a>` : '<span class="muted-pill">Coming soon</span>'}
+    </article>`).join('');
+  document.getElementById('year').textContent = new Date().getFullYear();
+</script>
+</body>
+</html>
