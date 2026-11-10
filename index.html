@@ -114,8 +114,8 @@
         <div class="facts">
           <div><b>Founded</b>2026</div>
           <div><b>Registered in</b>Wyoming, USA</div>
-          <div><b>Stores</b><span id="storeCount">2 open · 1 coming soon</span></div>
-          <div><b>Focus</b>Home &amp; living</div>
+          <div><b>Stores</b><span id="storeCount">2 open · 2 coming soon</span></div>
+          <div><b>Focus</b>Home, outdoor &amp; wellness</div>
         </div>
       </div>
       <div>
@@ -134,7 +134,7 @@
       <p class="label">Contact</p>
       <h2>Get in touch</h2>
       <div class="cols">
-        <div><b>Orders &amp; customer service</b><span>For questions about an order, please contact the store you purchased from.</span><br><a class="mail" href="https://solan-dree.myshopify.com/pages/contact" target="_blank" rel="noopener">MICASA customer service →</a><br><a class="mail" href="https://kwe1ru-vk.myshopify.com/pages/contact" target="_blank" rel="noopener">MIMONTE customer service →</a></div>
+        <div><b>Orders &amp; customer service</b><span>For questions about an order, please contact the store you purchased from.</span><span id="careLinks"></span></div>
         <div><b>Business inquiries</b><span>Partnerships, wholesale and press.</span><br><a class="mail" href="mailto:contact@solandree.com">contact@solandree.com</a></div>
         <div><b>Registered office</b><span>Solandree LLC<br>30 N Gould St Ste R<br>Sheridan, WY 82801<br>United States</span></div>
       </div>
@@ -164,6 +164,9 @@
   }).join('') + (STORES.length < 4 ? '<div class="tile more"><div class="img">More stores<br>coming soon</div><div class="cap"><span class="name">&nbsp;</span></div></div>' : '');
   const open = STORES.filter((s) => s.url).length, soon = STORES.length - open;
   document.getElementById('storeCount').textContent = `${open} open` + (soon ? ` · ${soon} coming soon` : '');
+  // 고객센터 링크: 문 연 샵(url 있는 샵)만 자동으로
+  document.getElementById('careLinks').innerHTML = STORES.filter((s) => s.url)
+    .map((s) => `<br><a class="mail" href="${esc(s.url)}/pages/contact" target="_blank" rel="noopener">${esc(s.name)} customer service →</a>`).join('');
   document.getElementById('year').textContent = new Date().getFullYear();
 
   // 메뉴를 누르면 가운데 화면만 바뀜 (주소 #company 처럼 바로 열 수도 있음, 로고 = STORES)
