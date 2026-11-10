@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Solandree LLC</title>
-<meta name="description" content="Solandree LLC builds and runs curated online stores for the home, including MICASA.">
+<meta name="description" content="Solandree LLC builds and runs curated online stores for the home, including MICASA and MIMONTE.">
 <meta property="og:site_name" content="Solandree">
 <meta property="og:title" content="Solandree">
 <meta property="og:description" content="A family of curated stores for the home.">
@@ -114,7 +114,7 @@
         <div class="facts">
           <div><b>Founded</b>2026</div>
           <div><b>Registered in</b>Wyoming, USA</div>
-          <div><b>Stores</b><span id="storeCount">1</span> · opening soon</div>
+          <div><b>Stores</b><span id="storeCount">2 open · 1 coming soon</span></div>
           <div><b>Focus</b>Home &amp; living</div>
         </div>
       </div>
@@ -134,7 +134,7 @@
       <p class="label">Contact</p>
       <h2>Get in touch</h2>
       <div class="cols">
-        <div><b>Orders &amp; customer service</b><span>For questions about an order, please contact the store you purchased from.</span><br><a class="mail" href="https://solan-dree.myshopify.com/pages/contact" target="_blank" rel="noopener">MICASA customer service →</a></div>
+        <div><b>Orders &amp; customer service</b><span>For questions about an order, please contact the store you purchased from.</span><br><a class="mail" href="https://solan-dree.myshopify.com/pages/contact" target="_blank" rel="noopener">MICASA customer service →</a><br><a class="mail" href="https://kwe1ru-vk.myshopify.com/pages/contact" target="_blank" rel="noopener">MIMONTE customer service →</a></div>
         <div><b>Business inquiries</b><span>Partnerships, wholesale and press.</span><br><a class="mail" href="mailto:contact@solandree.com">contact@solandree.com</a></div>
         <div><b>Registered office</b><span>Solandree LLC<br>30 N Gould St Ste R<br>Sheridan, WY 82801<br>United States</span></div>
       </div>
@@ -148,9 +148,9 @@
   // 샵 목록: 새 샵을 열면 한 줄 추가 (url 있으면 Visit, 새 탭으로 열림)
   const CDN = 'https://cdn.shopify.com/s/files/1/0948/2908/4919/files/';
   const STORES = [
-    { name: 'MICASA', tag: 'Home & living', img: CDN + 'photo-1618221195710-dd6b41faaea6.jpg', text: 'Fabrics, tableware, bedding and kitchen essentials for everyday living.', url: 'https://solan-dree.myshopify.com' },
-    { name: 'Furniture', tag: 'Coming soon', img: CDN + 'photo-1586023492125-27b2c045efd7.jpg', text: 'Compact, easy-to-assemble furniture for small spaces.', url: '' },
-    { name: 'Next store', tag: 'Coming soon', img: CDN + 'photo-1505693416388-ac5ce068fe85.jpg', text: 'More focused stores for the home are on the way.', url: '' },
+    { name: 'MICASA', tag: 'Furniture', img: CDN + 'photo-1618221195710-dd6b41faaea6.jpg', text: 'Sofas, chairs, tables and storage for everyday living.', url: 'https://solan-dree.myshopify.com' },
+    { name: 'MIMONTE', tag: 'Outdoor', img: 'https://cdn.shopify.com/s/files/1/1045/7559/8914/files/mimonte-patio-umbrella.jpg', text: 'Patio furniture, shade, grilling and garden goods.', url: 'https://kwe1ru-vk.myshopify.com' },
+    { name: 'MI ORDEN', tag: 'Coming soon', img: CDN + 'photo-1595515106969-1ce29566ff1c.jpg', text: 'Storage and organization for a tidy home.', url: '' },
   ];
 
   const esc = (s) => String(s).replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
@@ -161,7 +161,8 @@
       <div class="cap"><span class="name">${esc(s.name)}</span><span class="kind${s.url ? ' live' : ''}">${s.url ? 'Visit ↗' : esc(s.tag)}</span></div>`;
     return s.url ? `<a class="tile" href="${esc(s.url)}" target="_blank" rel="noopener" title="${esc(s.text)}">${inner}</a>` : `<div class="tile soon" title="${esc(s.text)}">${inner}</div>`;
   }).join('') + '<div class="tile more"><div class="img">More stores<br>coming soon</div><div class="cap"><span class="name">&nbsp;</span></div></div>';
-  document.getElementById('storeCount').textContent = STORES.filter((s) => s.url).length;
+  const open = STORES.filter((s) => s.url).length, soon = STORES.length - open;
+  document.getElementById('storeCount').textContent = `${open} open` + (soon ? ` · ${soon} coming soon` : '');
   document.getElementById('year').textContent = new Date().getFullYear();
 
   // 메뉴를 누르면 가운데 화면만 바뀜 (주소 #company 처럼 바로 열 수도 있음, 로고 = STORES)
