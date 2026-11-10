@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Solandree LLC</title>
-<meta name="description" content="Solandree LLC builds and runs curated online stores for the home, including MICASA and MIMONTE.">
+<meta name="description" content="Solandree LLC builds and runs curated online stores for the home, including MICASA, MIMONTE, MIORDEN and MICALMA.">
 <meta property="og:site_name" content="Solandree">
 <meta property="og:title" content="Solandree">
 <meta property="og:description" content="A family of curated stores for the home.">
@@ -151,6 +151,7 @@
     { name: 'MICASA', tag: 'Furniture', img: CDN + 'photo-1618221195710-dd6b41faaea6.jpg', text: 'Sofas, chairs, tables and storage for everyday living.', url: 'https://solan-dree.myshopify.com' },
     { name: 'MIMONTE', tag: 'Outdoor', img: 'https://cdn.shopify.com/s/files/1/1045/7559/8914/files/mimonte-patio-umbrella.jpg', text: 'Patio furniture, shade, grilling and garden goods.', url: 'https://kwe1ru-vk.myshopify.com' },
     { name: 'MIORDEN', tag: 'Coming soon', img: CDN + 'photo-1615874694520-474822394e73.jpg', text: 'Shelves, baskets and closet, kitchen and bath storage for a tidy home.', url: '' },
+    { name: 'MICALMA', tag: 'Coming soon', img: CDN + 'photo-1522771739844-6a9f6d5f14af.jpg', text: 'A new store for the home, opening soon.', url: '' },
   ];
 
   const esc = (s) => String(s).replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
@@ -160,7 +161,7 @@
     const inner = `<div class="img"><span style="${bg(s.img, 900)}"></span></div>
       <div class="cap"><span class="name">${esc(s.name)}</span><span class="kind${s.url ? ' live' : ''}">${s.url ? 'Visit ↗' : esc(s.tag)}</span></div>`;
     return s.url ? `<a class="tile" href="${esc(s.url)}" target="_blank" rel="noopener" title="${esc(s.text)}">${inner}</a>` : `<div class="tile soon" title="${esc(s.text)}">${inner}</div>`;
-  }).join('') + '<div class="tile more"><div class="img">More stores<br>coming soon</div><div class="cap"><span class="name">&nbsp;</span></div></div>';
+  }).join('') + (STORES.length < 4 ? '<div class="tile more"><div class="img">More stores<br>coming soon</div><div class="cap"><span class="name">&nbsp;</span></div></div>' : '');
   const open = STORES.filter((s) => s.url).length, soon = STORES.length - open;
   document.getElementById('storeCount').textContent = `${open} open` + (soon ? ` · ${soon} coming soon` : '');
   document.getElementById('year').textContent = new Date().getFullYear();
