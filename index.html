@@ -47,7 +47,8 @@
   a.tile:hover .img span { transform: scale(1.04); }
   .tile.soon .img { filter: grayscale(1); opacity: .55; }
   .tile.more .img { background: none; border: 1px solid var(--line); display: flex; align-items: center; justify-content: center; text-align: center; font-size: 10.5px; text-transform: uppercase; letter-spacing: .18em; color: #A8A8A8; padding: 20px; }
-  .tile .cap { flex: none; display: flex; justify-content: space-between; align-items: baseline; gap: 10px; padding-top: 12px; }
+  .tile .cap { flex: none; display: flex; justify-content: space-between; align-items: center; gap: 10px; padding-top: 12px; }
+  .tile .logo { display: block; height: 26px; width: auto; max-width: 70%; object-fit: contain; object-position: left center; }
   .tile .name { font-family: var(--serif); font-weight: 800; font-size: 22px; line-height: 1; }
   .tile .kind { font-size: 10.5px; text-transform: uppercase; letter-spacing: .16em; color: var(--muted); white-space: nowrap; }
   .tile .kind.live { color: var(--text); }
@@ -146,20 +147,21 @@
 
 <script>
   // 샵 목록: 새 샵을 열면 한 줄 추가 (url 있으면 Visit, 새 탭으로 열림)
+  // 사진·로고 = shops/<slug>-cover.jpg · shops/<slug>-logo.png (Hansol 브랜드 키트, Goods Pic/Shop 앱/<샵>/ 에서 줄여 복사)
   const CDN = 'https://cdn.shopify.com/s/files/1/0948/2908/4919/files/';
   const STORES = [
-    { name: 'MI NIDO', tag: 'Furniture', img: CDN + 'photo-1618221195710-dd6b41faaea6.jpg', text: 'Sofas, chairs, tables and storage for everyday living.', url: 'https://solan-dree.myshopify.com' },
-    { name: 'MI LOMA', tag: 'Outdoor', img: 'https://cdn.shopify.com/s/files/1/1045/7559/8914/files/mimonte-patio-umbrella.jpg', text: 'Patio furniture, shade, grilling and garden goods.', url: 'https://kwe1ru-vk.myshopify.com' },
-    { name: 'MI CAJA', tag: 'Storage', img: CDN + 'photo-1615874694520-474822394e73.jpg', text: 'Shelves, baskets and closet, kitchen and bath storage for a tidy home.', url: 'https://1pa94j-fz.myshopify.com' },
-    { name: 'MI LUZ', tag: 'Wellness', img: CDN + 'photo-1600618528240-fb9fc964b853.jpg', text: 'Yoga, meditation and rest: mats, cushions, candles and calm-corner pieces.', url: 'https://5tmc5c-ge.myshopify.com' },
+    { name: 'MI NIDO', slug: 'minido', tag: 'Furniture', text: 'Sofas, chairs, tables and storage for everyday living.', url: 'https://minidostore.com' },
+    { name: 'MI LOMA', slug: 'miloma', tag: 'Outdoor', text: 'Patio furniture, shade, grilling and garden goods.', url: 'https://milomastore.com' },
+    { name: 'MI CAJA', slug: 'micaja', tag: 'Storage', text: 'Shelves, baskets and closet, kitchen and bath storage for a tidy home.', url: 'https://micajastore.com' },
+    { name: 'MI LUZ', slug: 'miluz', tag: 'Wellness', text: 'Yoga, meditation and rest: mats, cushions, candles and calm-corner pieces.', url: 'https://miluzstore.com' },
   ];
 
   const esc = (s) => String(s).replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
   const bg = (u, w) => (u ? `background-image:url('${esc(u)}?width=${w}')` : '');
   // STORES 화면: 샵 카드를 나란히 (+ 맨 끝에 "더 생길 샵" 빈 카드)
   document.getElementById('wall').innerHTML = STORES.map((s) => {
-    const inner = `<div class="img"><span style="${bg(s.img, 900)}"></span></div>
-      <div class="cap"><span class="name">${esc(s.name)}</span><span class="kind${s.url ? ' live' : ''}">${s.url ? 'Visit ↗' : esc(s.tag)}</span></div>`;
+    const inner = `<div class="img"><span style="background-image:url('shops/${esc(s.slug)}-cover.jpg')"></span></div>
+      <div class="cap"><img class="logo" src="shops/${esc(s.slug)}-logo.png" alt="${esc(s.name)}"><span class="kind${s.url ? ' live' : ''}">${s.url ? 'Visit ↗' : esc(s.tag)}</span></div>`;
     return s.url ? `<a class="tile" href="${esc(s.url)}" target="_blank" rel="noopener" title="${esc(s.text)}">${inner}</a>` : `<div class="tile soon" title="${esc(s.text)}">${inner}</div>`;
   }).join('') + (STORES.length < 4 ? '<div class="tile more"><div class="img">More stores<br>coming soon</div><div class="cap"><span class="name">&nbsp;</span></div></div>' : '');
   const open = STORES.filter((s) => s.url).length, soon = STORES.length - open;
