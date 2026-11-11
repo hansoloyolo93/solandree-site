@@ -52,7 +52,14 @@
   .tile .name { font-family: var(--serif); font-weight: 800; font-size: 22px; line-height: 1; }
   .tile .kind { font-size: 10.5px; text-transform: uppercase; letter-spacing: .16em; color: var(--muted); white-space: nowrap; }
   .tile .kind.live { color: var(--text); }
-  .tile p.desc { display: none; }
+  /* 설명: PC(마우스)는 사진에 올리면 어두워지며 가운데에, 폰·태블릿(터치)은 로고 아래 작은 글씨로 늘 보임 */
+  .tile .img { position: relative; }
+  .tile .ov { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 14px; padding: 24px; text-align: center; color: #fff; background: rgba(0,0,0,.42); opacity: 0; transition: opacity .45s ease; pointer-events: none; }
+  .tile .ov p { margin: 0; max-width: 240px; font-size: 14px; line-height: 1.55; letter-spacing: .01em; }
+  .tile .ov b { font-weight: 400; font-size: 10.5px; text-transform: uppercase; letter-spacing: .18em; border-bottom: 1px solid rgba(255,255,255,.7); padding-bottom: 3px; }
+  .tile p.desc { display: none; margin: 6px 0 0; font-size: 12px; line-height: 1.45; color: var(--muted); }
+  @media (hover: hover) { a.tile:hover .ov, a.tile:focus-visible .ov { opacity: 1; } }
+  @media (hover: none) { .tile .ov { display: none; } .tile p.desc { display: block; } }
 
   footer { flex: none; display: flex; justify-content: space-between; gap: 12px; padding: 12px 28px 18px; font-size: 10.5px; text-transform: uppercase; letter-spacing: .14em; color: var(--muted); }
 
@@ -160,9 +167,11 @@
   const bg = (u, w) => (u ? `background-image:url('${esc(u)}?width=${w}')` : '');
   // STORES 화면: 샵 카드를 나란히 (+ 맨 끝에 "더 생길 샵" 빈 카드)
   document.getElementById('wall').innerHTML = STORES.map((s) => {
-    const inner = `<div class="img"><span style="background-image:url('shops/${esc(s.slug)}-cover.jpg')"></span></div>
-      <div class="cap"><img class="logo" src="shops/${esc(s.slug)}-logo.png" alt="${esc(s.name)}"><span class="kind${s.url ? ' live' : ''}">${s.url ? 'Visit ↗' : esc(s.tag)}</span></div>`;
-    return s.url ? `<a class="tile" href="${esc(s.url)}" target="_blank" rel="noopener" title="${esc(s.text)}">${inner}</a>` : `<div class="tile soon" title="${esc(s.text)}">${inner}</div>`;
+    const inner = `<div class="img"><span style="background-image:url('shops/${esc(s.slug)}-cover.jpg')"></span>
+        <div class="ov"><p>${esc(s.text)}</p>${s.url ? '<b>Visit store →</b>' : ''}</div></div>
+      <div class="cap"><img class="logo" src="shops/${esc(s.slug)}-logo.png" alt="${esc(s.name)}"><span class="kind${s.url ? ' live' : ''}">${s.url ? 'Visit ↗' : esc(s.tag)}</span></div>
+      <p class="desc">${esc(s.text)}</p>`;
+    return s.url ? `<a class="tile" href="${esc(s.url)}" target="_blank" rel="noopener">${inner}</a>` : `<div class="tile soon">${inner}</div>`;
   }).join('') + (STORES.length < 4 ? '<div class="tile more"><div class="img">More stores<br>coming soon</div><div class="cap"><span class="name">&nbsp;</span></div></div>' : '');
   const open = STORES.filter((s) => s.url).length, soon = STORES.length - open;
   document.getElementById('storeCount').textContent = `${open} open` + (soon ? ` · ${soon} coming soon` : '');
